@@ -1,7 +1,7 @@
 {
   "name": "dbms-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "DBMS Project IIIT-Allahabad Sem 4",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,5 +16,6 @@
   },
   "devDependencies": {
     "concurrently": "^8.0.1"
-  }
+  },
+  "keywords": []
 }

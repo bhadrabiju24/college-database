@@ -228,17 +228,17 @@
       <label for="course_id" style="color:white">Course Name:</label>
       <select id="course_id" name="course_id" required>
         <option value="">--Select Course--</option>
-        <option value="1">Introduction to Computer Science</option>
-        <option value="2">Digital Logic Design</option>
-        <option value="3">Calculus I</option>
+        <option value="30">Introduction to Computer Science</option>
+        <option value="1">Digital Logic Design</option>
+        <option value="6">Calculus I</option>
         <option value="4">Introduction to Literature</option>
         <option value="5">US History I</option>
-        <option value="6">Data Structures and Algorithms</option>
+        <option value="2">Data Structures and Algorithms</option>
         <option value="7">Power Systems</option>
         <option value="8">Linear Algebra</option>
         <option value="9">Shakespearean Literature</option>
         <option value="10">World History I</option>
-        <option value="11">Computer Networks</option>
+        <option value="3">Computer Networks</option>
         <option value="12">Electronics I</option>
         <option value="13">Calculus II</option>
         <option value="14">Modern American Literature</option>
@@ -293,12 +293,12 @@
         course_id: courseId
       };
 
-      fetch('/submit', {
+      fetch('http://localhost:3000/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body:JSON.stringify(data)
       })
         .then(response => response.text())
         .then(data => {

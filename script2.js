@@ -7,7 +7,7 @@ const app = express();
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '#',
+    password: '',
     database: 'CCD'
 });
 
@@ -22,17 +22,12 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.static('DBMS PROJECT'));
+
 // Route to handle search filter request
 app.get('/search', (req, res) => {
-    const department_id = req.query.department_id;
-    const instructor_id = req.query.instructor_id;
-    const course_id = req.query.course_id;
-    const course_name = req.query.course_name;
     const student_id = req.query.student_id;
-    const student_name = req.query.student_name;
-    const year = req.query.year;
 
-    // Construct the SQL query based on the search filter
+    // SQL query to search for student by student_id
     let sql = 'SELECT s.student_id, s.student_name, s.year, s.age, s.address, ' +
         'c.course_id, c.course_name, c.course_duration, ' +
         'i.instructor_id, i.instructor_name, ' +
@@ -43,32 +38,8 @@ app.get('/search', (req, res) => {
         'JOIN department d ON c.department_id = d.department_id ' +
         'WHERE 1 = 1 ';
 
-    if (department_id) {
-        sql += `AND d.department_id = ${department_id} `;
-    }
-
-    if (instructor_id) {
-        sql += `AND i.instructor_id = ${instructor_id} `;
-    }
-
-    if (course_id) {
-        sql += `AND c.course_id = ${course_id} `;
-    }
-
-    if (course_name) {
-        sql += `AND c.course_name LIKE '%${course_name}%' `;
-    }
-
     if (student_id) {
-        sql += `AND s.student_id = ${student_id} `;
-    }
-
-    if (student_name) {
-        sql += `AND s.student_name LIKE '%${student_name}%' `;
-    }
-
-    if (year) {
-        sql += `AND s.year = ${year} `;
+        sql += `AND s.student_id = ${mysql.escape(student_id)} `; // Prevent SQL injection
     }
 
     // Execute the SQL query
